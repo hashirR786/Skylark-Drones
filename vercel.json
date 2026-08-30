@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/api/monday", "destination": "/api/monday" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "functions": {
+    "api/monday.js": {
+      "maxDuration": 30
+    }
+  }
+}
