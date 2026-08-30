@@ -26,26 +26,14 @@ export async function executeMondayGraphQL<T>(apiKey: string, query: string, var
     throw new Error('Monday.com API key is required');
   }
 
-  const useProxy = shouldUseProxy();
-  const url = useProxy ? PROXY_URL : MONDAY_API_URL;
-
-  const body = useProxy
-    ? JSON.stringify({ query, variables, apiKey })
-    : JSON.stringify({ query, variables });
-
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
-
-  if (!useProxy) {
-    headers['Authorization'] = apiKey;
-    headers['API-Version'] = '2024-01';
-  }
-
-  const response = await fetch(url, {
+  const response = await fetch(MONDAY_API_URL, {
     method: 'POST',
-    headers,
-    body,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': apiKey.trim(),
+      'API-Version': '2024-01',
+    },
+    body: JSON.stringify({ query, variables }),
   });
 
   if (!response.ok) {

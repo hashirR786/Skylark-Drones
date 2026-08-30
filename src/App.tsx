@@ -22,13 +22,13 @@ export function App() {
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' | 'error' } | null>(null);
   const [initialSearchQuery, setInitialSearchQuery] = useState<string>('');
 
-  // Pre-load the Monday.com API token — board IDs still need to be set via the modal
+  // Pre-load the Monday.com API token and discovered boards
   const [mondayConfig, setMondayConfig] = useState<MondayConfig>({
     apiKey: MONDAY_API_TOKEN,
-    dealsBoardId: '',
-    workOrdersBoardId: '',
-    isConnected: false,
-    syncStatus: 'idle',
+    dealsBoardId: '5030971698',
+    workOrdersBoardId: '5030971683',
+    isConnected: true,
+    syncStatus: 'synced',
   });
 
   const metrics: CrossBoardMetrics = computeOverallMetrics(deals, workOrders);
